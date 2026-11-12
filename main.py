@@ -6,9 +6,9 @@ set_website_title("Bird Identifier")
 set_site_information(
     author="Ashleigh Cheeseman",
     description="Use specific characteristics to identify a bird.",
-    sources="",
-    planning=[],
-    links=[]
+    sources="Drafter Docs",
+    planning=["Copy of CS1 Final Project 0_ Pick a Problem.pdf","CS1 Final Project 1_ Design.pdf"],
+    links=["https://github.com/ashleighcheeseman/bird-identifier"]
 )
 
 hide_debug_information()
@@ -30,45 +30,45 @@ class State:
     
 BIRDS = [
     Bird("American Robin", ["Orange", "Brown", "Gray"],
-         ["forests", "woodlands", "urban", "fields"], "medium"),
+         ["Forests", "Woodlands", "Urban", "Fields"], "Medium"),
     Bird("Northern Cardinal", ["Red", "Black"],
-         ["woodlands", "forests", "urban"], "medium"),
+         ["Woodlands", "forests", "Urban"], "Medium"),
     Bird("Blue Jay", ["Blue", "White", "Black"],
-         ["forests", "woodlands", "urban"], "medium"),
+         ["Forests", "Woodlands", "Urban"], "Medium"),
     Bird("American Goldfinch", ["Yellow", "Black", "White"],
-         ["fields", "grasslands", "urban"], "small"),
+         ["Fields", "Grasslands", "Urban"], "Small"),
     Bird("House Sparrow", ["Brown", "Gray", "Black"],
-         ["urban", "fields", "grasslands"], "small"),
+         ["Urban", "Fields", "Grasslands"], "Small"),
     Bird("Mourning Dove", ["Gray", "Brown"],
-         ["woodlands", "fields", "urban", "grasslands"], "medium"),
+         ["Woodlands", "Fields", "Urban", "Grasslands"], "Medium"),
     Bird("Downy Woodpecker", ["Black", "White", "Red"],
-         ["forests", "woodlands", "urban"], "small"),
+         ["Forests", "Woodlands", "Urban"], "Small"),
     Bird("Red-bellied Woodpecker", ["Red", "Black", "White", "Gray"],
-         ["forests", "woodlands", "urban"], "medium"),
+         ["Forests", "Woodlands", "Urban"], "Medium"),
     Bird("Black-capped Chickadee", ["Black", "White", "Gray"],
-         ["forests", "woodlands"], "small"),
+         ["Forests", "Woodlands"], "Small"),
     Bird("Tufted Titmouse", ["Gray", "White", "Brown"],
-         ["forests", "woodlands", "urban"], "small"),
+         ["Forests", "Woodlands", "Urban"], "Small"),
     Bird("Eastern Bluebird", ["Blue", "Orange", "White"],
-         ["fields", "grasslands", "woodlands"], "small"),
+         ["Fields", "Grasslands", "Woodlands"], "Small"),
     Bird("House Finch", ["Red", "Brown", "Gray"],
-         ["urban", "fields", "woodlands"], "small"),
+         ["Urban", "Fields", "Woodlands"], "Small"),
     Bird("Common Grackle", ["Black", "Blue", "Green"],
-         ["wetlands", "fields", "urban", "grasslands"], "medium"),
+         ["Wetlands", "Fields", "Urban", "Grasslands"], "Medium"),
     Bird("Mallard", ["Green", "Brown", "White", "Gray"],
-         ["wetlands", "fields", "urban"], "large"),
+         ["Wetlands", "Fields", "Urban"], "Large"),
     Bird("Canada Goose", ["Brown", "Black", "White"],
-         ["wetlands", "fields", "grasslands", "urban"], "large"),
+         ["Wetlands", "Fields", "Grasslands", "Urban"], "Large"),
     Bird("Great Blue Heron", ["Blue", "Gray", "White"],
-         ["wetlands", "fields"], "large"),
+         ["Wetlands", "Fields"], "Large"),
     Bird("Red-tailed Hawk", ["Brown", "White", "Red"],
-         ["forests", "grasslands", "fields", "woodlands"], "large"),
+         ["Forests", "Grasslands", "Fields", "Woodlands"], "Large"),
     Bird("Bald Eagle", ["Brown", "White", "Yellow"],
-         ["forests", "wetlands"], "large"),
+         ["Forests", "Wetlands"], "Large"),
     Bird("Wild Turkey", ["Brown", "Black", "Gray"],
-         ["woodlands", "forests", "fields"], "large"),
+         ["Woodlands", "Forests", "Fields"], "Large"),
     Bird("Barn Swallow", ["Blue", "Orange", "White"],
-         ["fields", "grasslands", "wetlands", "urban"], "small")
+         ["Fields", "Grasslands", "Wetlands", "Urban"], "Small")
 ]
     
 
@@ -124,7 +124,7 @@ def select_habitat(state:State)->Page:
     return Page(state, [
         Header("What habitat was the bird in?",2),
         Text("Select the habitat"),
-        RelatedCheckBox("habitats","Forest"),
+        RelatedCheckBox("habitats","Forests"),
         " Forest",
         RelatedCheckBox("habitats","Woodlands"),
         " Woodlands",
@@ -232,15 +232,7 @@ def search_results(state: State, size: str) -> Page:
 
         state.matching_birds = []
 
-        for bird, score in bird_scores:
-            if score == highest_score:
-                state.matching_birds.append(bird)
-                
-        if highest_score == 0:
-            state.matching_birds = []
-        else:
-            state.matching_birds = []
-
+        if highest_score > 0:
             for bird, score in bird_scores:
                 if score == highest_score:
                     state.matching_birds.append(bird)
